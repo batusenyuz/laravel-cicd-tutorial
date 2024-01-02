@@ -9,9 +9,9 @@ services:
       context: ./dockerfiles
       dockerfile: nginx.dockerfile
       args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
-        - USER=${USER:-youruser}
+        - UID=${UID:-1}
+        - GID=${GID:-1}
+        - USER=${USER:-root}
     container_name: nginx
     ports:
       - 8090:80
@@ -47,9 +47,9 @@ services:
       context: ./dockerfiles
       dockerfile: php.dockerfile
       args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
-        - USER=${USER:-youruser}
+        - UID=${UID:-1}
+        - GID=${GID:-1}
+        - USER=${USER:-root}
     container_name: php
     volumes:
       - ./:/var/www/html:delegated
@@ -70,9 +70,9 @@ services:
       context: ./dockerfiles
       dockerfile: composer.dockerfile
       args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
-        - USER=${USER:-youruser}
+        - UID=${UID:-1}
+        - GID=${GID:-1}
+        - USER=${USER:-root}
     container_name: composer
     volumes:
       - ./:/var/www/html
@@ -102,9 +102,9 @@ services:
       context: ./dockerfiles
       dockerfile: php.dockerfile
       args:
-        - UID=${UID:-1000}
-        - GID=${GID:-1000}
-        - USER=${USER:-youruser}
+        - UID=${UID:-1}
+        - GID=${GID:-1}
+        - USER=${USER:-root}
     container_name: artisan
     volumes:
       - ./:/var/www/html:delegated
