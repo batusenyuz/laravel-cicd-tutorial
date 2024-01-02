@@ -9,14 +9,14 @@ services:
       context: ./dockerfiles
       dockerfile: nginx.dockerfile
       args:
-        - UID=${UID:-1}
-        - GID=${GID:-1}
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
         - USER=${USER:-root}
     container_name: nginx
     ports:
       - 8090:80
     volumes:
-      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html:delegated
+      - ./:/var/www/html:delegated
     depends_on:
       - php
       - redis
@@ -47,12 +47,12 @@ services:
       context: ./dockerfiles
       dockerfile: php.dockerfile
       args:
-        - UID=${UID:-1}
-        - GID=${GID:-1}
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
         - USER=${USER:-root}
     container_name: php
     volumes:
-      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html:delegated
+      - ./:/var/www/html:delegated
     networks:
       - laravel
 
@@ -70,12 +70,12 @@ services:
       context: ./dockerfiles
       dockerfile: composer.dockerfile
       args:
-        - UID=${UID:-1}
-        - GID=${GID:-1}
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
         - USER=${USER:-root}
     container_name: composer
     volumes:
-      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html
+      - ./:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -88,7 +88,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html
+      - ./:/var/www/html
     ports:
       - 3000:3000
       - 3001:3001
@@ -102,12 +102,12 @@ services:
       context: ./dockerfiles
       dockerfile: php.dockerfile
       args:
-        - UID=${UID:-1}
-        - GID=${GID:-1}
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
         - USER=${USER:-root}
     container_name: artisan
     volumes:
-      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html:delegated
+      - ./:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
