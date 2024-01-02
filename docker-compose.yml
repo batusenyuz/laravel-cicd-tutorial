@@ -16,7 +16,7 @@ services:
     ports:
       - 8090:80
     volumes:
-      - ./:/var/www/html:delegated
+      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html:delegated
     depends_on:
       - php
       - redis
@@ -52,7 +52,7 @@ services:
         - USER=${USER:-root}
     container_name: php
     volumes:
-      - ./:/var/www/html:delegated
+      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html:delegated
     networks:
       - laravel
 
@@ -75,7 +75,7 @@ services:
         - USER=${USER:-root}
     container_name: composer
     volumes:
-      - ./:/var/www/html
+      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
@@ -88,7 +88,7 @@ services:
     image: node:13.7
     container_name: npm
     volumes:
-      - ./:/var/www/html
+      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html
     ports:
       - 3000:3000
       - 3001:3001
@@ -107,7 +107,7 @@ services:
         - USER=${USER:-root}
     container_name: artisan
     volumes:
-      - ./:/var/www/html:delegated
+      - /var/lib/docker/volumes/jenkins/_data/workspace/laravel:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
