@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 networks:
   laravel:
@@ -14,7 +14,7 @@ services:
         - USER=${USER:-youruser}
     container_name: nginx
     ports:
-      - 80:80
+      - 8090:80
     volumes:
       - ./:/var/www/html:delegated
     depends_on:
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - 3306:3306
+      - 3307:3306
     environment:
       MYSQL_DATABASE: homestead
       MYSQL_USER: homestead
@@ -80,7 +80,7 @@ services:
     depends_on:
       - php
     user: ${USER:-youruser}
-    entrypoint: ['composer', '--ignore-platform-reqs']
+    entrypoint: ["composer", "--ignore-platform-reqs"]
     networks:
       - laravel
 
@@ -93,7 +93,7 @@ services:
       - 3000:3000
       - 3001:3001
     working_dir: /var/www/html
-    entrypoint: ['npm']
+    entrypoint: ["npm"]
     networks:
       - laravel
 
@@ -111,7 +111,7 @@ services:
     depends_on:
       - mysql
     working_dir: /var/www/html
-    entrypoint: ['php', '/var/www/html/artisan']
+    entrypoint: ["php", "/var/www/html/artisan"]
     networks:
       - laravel
 
